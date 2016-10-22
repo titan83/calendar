@@ -6,5 +6,6 @@
         <file>Images/prev.png</file>
         <file>Images/next.png</file>
         <file>CalendarCell.qml</file>
+        <file>CalendarTop.qml</file>
     </qresource>
 </RCC>
