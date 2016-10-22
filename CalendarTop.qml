@@ -5,55 +5,53 @@ Item {
     anchors.topMargin: 10
     width: parent.width
     height: childrenRect.height
-    Image {
-        id: monthPrev
-        source: "Images/prev.png"
-        anchors.left: parent.left
-        anchors.leftMargin: 10
-        MouseArea {
-            anchors.fill: parent
-            onClicked: showDate = new Date(showDate.getFullYear(), showDate.getMonth(), 0)
+    Row {
+        anchors.top: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
+        spacing: 10
+        Image {
+            source: "Images/prev.png"
+            MouseArea {
+                anchors.fill: parent
+                onClicked: showDate = new Date(showDate.setMonth(showDate.getMonth() - 1))
+            }
         }
-    }
-    Text {
-        id: month
-        color: "white"
-        text: Qt.formatDateTime(showDate, "MMMM")
-        font.bold: true
-        anchors.left: monthPrev.right
-    }
-    Image {
-        source: "Images/next.png"
-        anchors.left: month.right
-        MouseArea {
-            anchors.fill: parent
-            onClicked: showDate = new Date( showDate.getFullYear(), showDate.getMonth() + 1, 1)
+        Text {
+            width: 65
+            height: parent.height
+            horizontalAlignment: Qt.AlignHCenter
+            verticalAlignment: Qt.AlignVCenter
+            color: "gray"
+            text: Qt.formatDateTime(showDate, "MMM")
         }
-    }
-    Image {
-        id: yearPrev
-        source: "Images/prev.png"
-        anchors.right: currentYear.left
-        MouseArea {
-            anchors.fill: parent
-            onClicked: showDate = new Date(showDate.getFullYear()-1,0)
+        Image {
+            source: "Images/next.png"
+            MouseArea {
+                anchors.fill: parent
+                onClicked: showDate = new Date(showDate.setMonth(showDate.getMonth() + 1))
+            }
         }
-    }
-    Text {
-        id: currentYear
-        color: "white"
-        text: Qt.formatDateTime(showDate, "yyyy")
-        font.bold: true
-        anchors.right:yearNext.left
-    }
-    Image {
-        id:yearNext
-        source: "Images/next.png"
-        anchors.right: parent.right
-        anchors.rightMargin: 10
-        MouseArea {
-            anchors.fill: parent
-            onClicked: showDate = new Date(showDate.getFullYear()+1, 1)
+        Image {
+            source: "Images/prev.png"
+            MouseArea {
+                anchors.fill: parent
+                onClicked: showDate = new Date(showDate.setFullYear(showDate.getFullYear() -1))
+            }
+        }
+        Text {
+            width: 65
+            height: parent.height
+            horizontalAlignment: Qt.AlignHCenter
+            verticalAlignment: Qt.AlignVCenter
+            color: "gray"
+            text: Qt.formatDateTime(showDate, "yyyy")
+        }
+        Image {
+            source: "Images/next.png"
+            MouseArea {
+                anchors.fill: parent
+                onClicked: showDate = new Date(showDate.setFullYear(showDate.getFullYear() + 1))
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ Rectangle {
     property date today: new Date()
     property date showDate: new Date()
     property int daysInMonth: new Date(showDate.getFullYear(), showDate.getMonth() + 1, 0).getDate()
-    property int firstDay: new Date(showDate.getFullYear(), showDate.getMonth(), 1).getDay()
+    property int firstDay: new Date(showDate.getFullYear(), showDate.getMonth(), 1).getDay() - 1
 
     function isToday(index) {
         if (today.getFullYear() != showDate.getFullYear())
@@ -66,15 +66,15 @@ Rectangle {
 
                           Component.onCompleted: {
                               if (index < firstDay)
-                                  normalColor = calendar.color="green";
+                                  normalColor = calendar.color = "white";
                               else {
-                                  if (isToday(index-firstDay))
+                                  if (isToday(index - firstDay))
                                       normalColor = "yellow";
                                   else
                                       normalColor ="#eeeeee"
                               }
                           }
-                          color: dateMouse.pressed ? "blue" : (highLighted ? "grey" : normalColor)
+                          color: highLighted ? "grey" : normalColor
                           Layout.preferredWidth: (calendar.width - 20 - 60)/7
                           Layout.preferredHeight: (dateGrid.height - (dateLabels.rows - 1)*10)/dateLabels.rows
                           Layout.fillWidth: true
