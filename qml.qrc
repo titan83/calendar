@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>NewCalendar.qml</file>
+        <file>TestCalendar.qml</file>
+        <file>Images/prev.png</file>
+        <file>Images/next.png</file>
+        <file>CalendarCell.qml</file>
+    </qresource>
+</RCC>
