@@ -1,10 +1,10 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>TestCalendar.qml</file>
         <file>Images/prev.png</file>
         <file>Images/next.png</file>
-        <file>CalendarCell.qml</file>
-        <file>CalendarTop.qml</file>
+        <file>QML/CalendarCell.qml</file>
+        <file>QML/CalendarTop.qml</file>
+        <file>QML/NewCalendar.qml</file>
     </qresource>
 </RCC>

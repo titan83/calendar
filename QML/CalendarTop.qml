@@ -10,7 +10,7 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         spacing: 10
         Image {
-            source: "Images/prev.png"
+            source: "../Images/prev.png"
             MouseArea {
                 anchors.fill: parent
                 onClicked: showDate = new Date(showDate.setMonth(showDate.getMonth() - 1))
@@ -25,14 +25,14 @@ Item {
             text: Qt.formatDateTime(showDate, "MMM")
         }
         Image {
-            source: "Images/next.png"
+            source: "../Images/next.png"
             MouseArea {
                 anchors.fill: parent
                 onClicked: showDate = new Date(showDate.setMonth(showDate.getMonth() + 1))
             }
         }
         Image {
-            source: "Images/prev.png"
+            source: "../Images/prev.png"
             MouseArea {
                 anchors.fill: parent
                 onClicked: showDate = new Date(showDate.setFullYear(showDate.getFullYear() -1))
@@ -47,7 +47,7 @@ Item {
             text: Qt.formatDateTime(showDate, "yyyy")
         }
         Image {
-            source: "Images/next.png"
+            source: "../Images/next.png"
             MouseArea {
                 anchors.fill: parent
                 onClicked: showDate = new Date(showDate.setFullYear(showDate.getFullYear() + 1))
