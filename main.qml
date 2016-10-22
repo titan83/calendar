@@ -3,18 +3,8 @@ import QtQuick.Controls 1.4
 
 ApplicationWindow {
     visible: true
-    width: 640
-    height: 480
-    title: qsTr("Hello World")
+    title: qsTr("Calendar")
 
-    TestCalendar {
-
-    }
-
-//    Calendar {
-//    }
-//    NewCalendar {
-//        anchors.fill: parent
-//    }
+    TestCalendar {}
 }
 

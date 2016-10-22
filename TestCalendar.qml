@@ -6,13 +6,11 @@ import Qt.labs.calendar 1.0
 Rectangle {
     id: calendar
     width: 400;
-    height: 300
-    color: "#903030"
+    height: 400
 
     property date today: new Date()
     property date showDate: new Date()
-    property int daysInMonth: new Date(showDate.getFullYear(), showDate.getMonth() + 1, 0).getDate()
-    property int firstDay: new Date(showDate.getFullYear(), showDate.getMonth(), 1).getDay() - 1
+    property string selectedDate
 
     function isToday(index) {
         if (today.getFullYear() != showDate.getFullYear())
@@ -26,15 +24,31 @@ Rectangle {
     CalendarTop {
         id: calendarTop
     }
+    Text {
+        id: currentDate
+        anchors.top: calendarTop.bottom
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.topMargin: 5
+//        height: 20
+        text: {
+            var currentDate;
+            if (selectedDate.length == 0)
+                currentDate = "Выбранная дата:"
+            else
+                currentDate = ("Выбранная дата: %SelectedDate%").replace("%SelectedDate%", selectedDate)
+        }
+    }
+
 
     Item {
         id: dateLabels
-        anchors.top: calendarTop.bottom
+        anchors.top: currentDate.bottom
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.margins: 10
 
-        height: calendar.height - calendarTop.height - 20 - calendarTop.anchors.topMargin
+        height: calendar.height - calendarTop.height - currentDate.height - 20 - calendarTop.anchors.topMargin
         property int rows: 6
 
         DayOfWeekRow {
@@ -57,54 +71,7 @@ Rectangle {
                 height: parent.height
                 columnSpacing: 10
                 rowSpacing: 10
-                Repeater {
-                    id: repeater
-                    model: firstDay + daysInMonth
-                    Rectangle {
-                          property bool highLighted: false
-                          property color normalColor
-
-                          Component.onCompleted: {
-                              if (index < firstDay)
-                                  normalColor = calendar.color = "white";
-                              else {
-                                  if (isToday(index - firstDay))
-                                      normalColor = "yellow";
-                                  else
-                                      normalColor ="#eeeeee"
-                              }
-                          }
-                          color: highLighted ? "grey" : normalColor
-                          Layout.preferredWidth: (calendar.width - 20 - 60)/7
-                          Layout.preferredHeight: (dateGrid.height - (dateLabels.rows - 1)*10)/dateLabels.rows
-                          Layout.fillWidth: true
-                          Layout.fillHeight: true
-
-                          Text {
-                              id: dateText
-                              color: highLighted?"yellow":"black"
-                              anchors.centerIn: parent
-                              text: index + 1 - firstDay
-                              opacity: (index < firstDay) ? 0 : 1
-                              font.bold: isToday(index - firstDay)  || highLighted
-                          }
-
-                          MouseArea {
-                              id: dateMouse
-                              enabled: index >= firstDay
-                              anchors.fill: parent
-                              onClicked: {
-                                  var clickedDate = new Date( showDate.getFullYear(), showDate.getMonth() + 1, index + 1 - firstDay)
-                                  if (dateGrid.currentActive != -1)
-                                      repeater.itemAt(dateGrid.currentActive).highLighted = false;
-                                  if (!isToday(index - firstDay)){
-                                      highLighted = true
-                                      dateGrid.currentActive = index
-                                  }
-                              }
-                          }
-                      }
-                }
+                CalendarCell {}
             }
         }
     }
